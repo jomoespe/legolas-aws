@@ -44,7 +44,8 @@ public class AmazonImageAnalysisService implements ImageAnalysisService {
     private final Function<DetectLabelsResult, ImageAnalysisResult> adaptor = result -> 
         new ImageAnalysisResult( labels.apply(result), DEFAULT_ADULT_CONTENT_SCORE );
 
-    private final Function<Supplier<ByteBuffer>, ImageAnalysisResult> analyzer = adaptor.compose(callAws).compose(createAwsRequest).compose(image);
+    private final Function<Supplier<ByteBuffer>, ImageAnalysisResult> analyzer = 
+        adaptor.compose(callAws).compose(createAwsRequest).compose(image);
       
     @Override
     public String name() { return NAME; }
