@@ -17,4 +17,3 @@ To be able to invoke to *AWS Rekognition* services some environment variables mu
 
   - `aws.accessKeyId`
   - `aws.secretKey`
-
