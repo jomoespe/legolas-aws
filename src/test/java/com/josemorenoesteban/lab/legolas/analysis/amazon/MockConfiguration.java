@@ -8,24 +8,23 @@ import com.amazonaws.services.rekognition.model.DetectLabelsResult;
 import com.amazonaws.services.rekognition.model.Label;
 
 public class MockConfiguration implements Configuration {
-
     @Override
     public AmazonRekognitionClient client() {
         return new AmazonRekognitionClient() {
             @Override
-            public DetectLabelsResult detectLabels(DetectLabelsRequest detectLabelsRequest) {
+            public DetectLabelsResult detectLabels(final DetectLabelsRequest detectLabelsRequest) {
                 DetectLabelsResult result = new DetectLabelsResult();
                 result.setLabels(asList(
-                        label("Campo0", 0.0f),
-                        label("Campo1", 0.1f),
-                        label("Campo2", 0.2f),
-                        label("Campo3", 0.3f),
-                        label("Campo4", 0.4f),
-                        label("Campo5", 0.5f),
-                        label("Campo6", 0.6f),
-                        label("Campo7", 0.7f),
-                        label("Campo8", 0.8f),
-                        label("Campo9", 0.9f)
+                        label("Label_0", 0.0f),
+                        label("Label_1", 0.1f),
+                        label("Label_2", 0.2f),
+                        label("Label_3", 0.3f),
+                        label("Label_4", 0.4f),
+                        label("Label_5", 0.5f),
+                        label("Label_6", 0.6f),
+                        label("Label_7", 0.7f),
+                        label("Label_8", 0.8f),
+                        label("Label_9", 0.9f)
                 ));
                 return result;
             }
