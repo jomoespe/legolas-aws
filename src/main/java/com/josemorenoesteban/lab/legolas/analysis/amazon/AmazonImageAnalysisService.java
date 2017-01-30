@@ -1,5 +1,7 @@
 package com.josemorenoesteban.lab.legolas.analysis.amazon;
 
+import static com.josemorenoesteban.lab.legolas.analysis.amazon.Configuration.load;
+
 import static java.util.stream.Collectors.toMap;
 
 import com.josemorenoesteban.lab.legolas.analysis.ImageAnalysisResult;
@@ -19,7 +21,7 @@ public class AmazonImageAnalysisService implements ImageAnalysisService {
     private static final String NAME                        = "amazon-rekognition";
     private static final Float  DEFAULT_ADULT_CONTENT_SCORE =  0f; // Amazon doesn't gives any information about adult content of an image
 
-    private final Configuration conf = Configuration.instance();
+    private final Configuration conf = load();
 
     private final Function<Supplier<ByteBuffer>, Image> image = imageBytes -> 
         new Image()
@@ -32,7 +34,8 @@ public class AmazonImageAnalysisService implements ImageAnalysisService {
         .withMinConfidence(conf.minConfidence());
     
     private final Function<DetectLabelsRequest, DetectLabelsResult> callAws = request -> 
-        conf.client()
+        conf
+        .client()
         .detectLabels(request);
     
     private Function<DetectLabelsResult, Map<String, Float>> labels = result -> 
@@ -48,8 +51,12 @@ public class AmazonImageAnalysisService implements ImageAnalysisService {
         adaptor.compose(callAws).compose(createAwsRequest).compose(image);
       
     @Override
-    public String name() { return NAME; }
+    public String name() { 
+        return NAME; 
+    }
 
     @Override
-    public ImageAnalysisResult analyse(final Supplier<ByteBuffer> imageBytes) { return analyzer.apply(imageBytes); }
+    public ImageAnalysisResult analyse(final Supplier<ByteBuffer> imageBytes) { 
+        return analyzer.apply(imageBytes); 
+    }
 }

@@ -15,7 +15,7 @@ public interface Configuration {
     static final Integer DEFAULT_MAX_LABELS     = 20;
     static final Float   DEFAULT_MIN_CONFIDENCE = 50f;
     
-    static Configuration instance() { 
+    static Configuration load() { 
         final ServiceLoader<Configuration> loader = ServiceLoader.load(Configuration.class);
         return requireNonNull(loader.iterator().next(), 
                               "No environment instance class found");  // TODO review this message
