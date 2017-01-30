@@ -1,5 +1,5 @@
-LEGOLAS - Google Vision API Proof of Concept
-============================================
+LEGOLAS - Amazon Rekognition Proof of Concept
+=============================================
 [![Build Status](https://travis-ci.org/jomoespe/legolas-aws.svg?branch=master)](https://travis-ci.org/jomoespe/legolas-aws)
 
 AWS implementation for Legolas service.
