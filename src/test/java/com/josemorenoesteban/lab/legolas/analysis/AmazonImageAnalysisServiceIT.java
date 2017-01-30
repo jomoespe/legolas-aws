@@ -1,6 +1,7 @@
 package com.josemorenoesteban.lab.legolas.analysis;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
+import java.util.Optional;
 import java.util.function.Function;
 import org.junit.Before;
 
@@ -28,10 +30,10 @@ public class AmazonImageAnalysisServiceIT {
     
     @Test
     public void canAnalyseChucho() {
-        ImageAnalysisResult result  = service.analyse(() -> forImage.apply("/chucho.jpg"));
-        assertNotNull(result);
-        assertEquals(0f, result.adultContentScore(), 0);
-        assertEquals(10, result.labels().size());
+        Optional<ImageAnalysisResult> result  = service.analyse(() -> forImage.apply("/chucho.jpg"));
+        assertTrue(result.isPresent());
+        assertEquals(0f, result.get().adultContentScore(), 0);
+        assertEquals(10, result.get().labels().size());
     }
 
     // Helper functions

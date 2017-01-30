@@ -2,6 +2,7 @@ package com.josemorenoesteban.lab.legolas.analysis.amazon;
 
 import static com.josemorenoesteban.lab.legolas.analysis.amazon.Configuration.load;
 
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 
 import com.josemorenoesteban.lab.legolas.analysis.ImageAnalysisResult;
@@ -14,6 +15,7 @@ import com.amazonaws.services.rekognition.model.Label;
 
 import java.nio.ByteBuffer;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -56,7 +58,7 @@ public class AmazonImageAnalysisService implements ImageAnalysisService {
     }
 
     @Override
-    public ImageAnalysisResult analyse(final Supplier<ByteBuffer> imageBytes) { 
-        return analyzer.apply(imageBytes); 
+    public Optional<ImageAnalysisResult> analyse(final Supplier<ByteBuffer> imageBytes) { 
+        return ofNullable(analyzer.apply(imageBytes)); 
     }
 }
